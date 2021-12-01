@@ -3,11 +3,12 @@
 
 import type { HexString } from '@polkadot/util/types';
 
-import { hasBigInt, u8aToU8a } from '@polkadot/util';
+import { hash256 as keccak256Js, hash512 as keccak512Js } from '@stablelib/sha3';
+
+import { u8aToU8a } from '@polkadot/util';
 import { isReady, keccak256, keccak512 } from '@polkadot/wasm-crypto';
 
 import { createAsHex, createBitHasher } from '../helpers';
-import { keccak_256 as keccak256Js, keccak_512 as keccak512Js } from '../noble-hashes/lib/sha3';
 
 type BitLength = 256 | 512;
 
@@ -29,7 +30,7 @@ export function keccakAsU8a (value: HexString | Buffer | Uint8Array | string, bi
   const is256 = bitLength === 256;
   const u8a = u8aToU8a(value);
 
-  return !hasBigInt || (!onlyJs && isReady())
+  return !onlyJs && isReady()
     ? is256
       ? keccak256(u8a)
       : keccak512(u8a)

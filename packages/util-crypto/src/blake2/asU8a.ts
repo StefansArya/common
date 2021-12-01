@@ -3,11 +3,12 @@
 
 import type { HexString } from '@polkadot/util/types';
 
-import { hasBigInt, u8aToU8a } from '@polkadot/util';
+import { hash as blake2bJs } from '@stablelib/blake2b';
+
+import { u8aToU8a } from '@polkadot/util';
 import { blake2b, isReady } from '@polkadot/wasm-crypto';
 
 import { createAsHex } from '../helpers';
-import { blake2b as blake2bJs } from '../noble-hashes/lib/blake2b';
 
 type BitLength = 64 | 128 | 256 | 384 | 512;
 
@@ -29,9 +30,9 @@ export function blake2AsU8a (data: HexString | Uint8Array | string, bitLength: B
   const byteLength = Math.ceil(bitLength / 8);
   const u8a = u8aToU8a(data);
 
-  return !hasBigInt || (!onlyJs && isReady())
+  return !onlyJs && isReady()
     ? blake2b(u8a, u8aToU8a(key), byteLength)
-    : blake2bJs(u8a, { dkLen: byteLength, key: key || undefined });
+    : blake2bJs(u8a, byteLength, { key: key || undefined });
 }
 
 /**

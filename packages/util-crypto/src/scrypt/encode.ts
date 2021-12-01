@@ -4,10 +4,11 @@
 import type { HexString } from '@polkadot/util/types';
 import type { Params } from './types';
 
-import { hasBigInt, objectSpread, u8aToU8a } from '@polkadot/util';
+import { deriveKey as scryptJs } from '@stablelib/scrypt';
+
+import { u8aToU8a } from '@polkadot/util';
 import { isReady, scrypt } from '@polkadot/wasm-crypto';
 
-import { scrypt as scryptJs } from '../noble-hashes/lib/scrypt';
 import { randomAsU8a } from '../random/asU8a';
 import { DEFAULT_PARAMS } from './defaults';
 
@@ -22,9 +23,9 @@ export function scryptEncode (passphrase?: HexString | Uint8Array | string, salt
 
   return {
     params,
-    password: !hasBigInt || (!onlyJs && isReady())
+    password: !onlyJs && isReady()
       ? scrypt(u8a, salt, Math.log2(params.N), params.r, params.p)
-      : scryptJs(u8a, salt, objectSpread({ dkLen: 64 }, params)),
+      : scryptJs(u8a, salt, params.N, params.r, params.p, 64),
     salt
   };
 }

@@ -3,12 +3,13 @@
 
 import type { HexString } from '@polkadot/util/types';
 
-import { hasBigInt, u8aToU8a } from '@polkadot/util';
+import { hash as sha256Js } from '@stablelib/sha256';
+import { hash as sha512Js } from '@stablelib/sha512';
+
+import { u8aToU8a } from '@polkadot/util';
 import { isReady, sha256, sha512 } from '@polkadot/wasm-crypto';
 
 import { createBitHasher } from '../helpers';
-import { sha256 as sha256Js } from '../noble-hashes/lib/sha256';
-import { sha512 as sha512Js } from '../noble-hashes/lib/sha512';
 
 type BitLength = 256 | 512;
 
@@ -20,7 +21,7 @@ export function shaAsU8a (value: HexString | Buffer | Uint8Array | string, bitLe
   const is256 = bitLength === 256;
   const u8a = u8aToU8a(value);
 
-  return !hasBigInt || (!onlyJs && isReady())
+  return !onlyJs && isReady()
     ? is256
       ? sha256(u8a)
       : sha512(u8a)

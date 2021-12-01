@@ -1770,13 +1770,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noble/hashes@npm:0.4.1":
-  version: 0.4.1
-  resolution: "@noble/hashes@npm:0.4.1"
-  checksum: 3c706beec3bcd9e43f2b88c0791f022b645b5c0a9dd76889dfc189e51da2f0c692ef846b5889e074338353e335269c14f4c0ea34329b4d7dd45ae82c482b4605
-  languageName: node
-  linkType: hard
-
 "@nodelib/fs.scandir@npm:2.1.4":
   version: 2.1.4
   resolution: "@nodelib/fs.scandir@npm:2.1.4"
@@ -2091,12 +2084,18 @@ __metadata:
   resolution: "@polkadot/util-crypto@workspace:packages/util-crypto"
   dependencies:
     "@babel/runtime": ^7.16.3
-    "@noble/hashes": 0.4.1
     "@polkadot/networks": 8.0.6-3
     "@polkadot/util": 8.0.6-3
     "@polkadot/wasm-crypto": ^4.4.1
     "@polkadot/x-randomvalues": 8.0.6-3
+    "@stablelib/blake2b": ^1.0.1
     "@stablelib/ed25519": ^1.0.2
+    "@stablelib/hmac": ^1.0.1
+    "@stablelib/pbkdf2": ^1.0.1
+    "@stablelib/scrypt": ^1.0.1
+    "@stablelib/sha256": ^1.0.1
+    "@stablelib/sha3": ^1.0.1
+    "@stablelib/sha512": ^1.0.1
     "@types/bn.js": ^4.11.6
     "@types/elliptic": ^6.4.14
     bn.js: ^4.12.0
@@ -2343,6 +2342,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stablelib/blake2b@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/blake2b@npm:1.0.1"
+  dependencies:
+    "@stablelib/binary": ^1.0.1
+    "@stablelib/hash": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: 6bf19dc8381ea1bb288a14fd7dd0af3c634353d37619865db04fd2493a3a00a3be0ee1c477beefd9ff8fb5eadf7fab01ba5ead1e8745085e7095f5b49b09e5c2
+  languageName: node
+  linkType: hard
+
+"@stablelib/constant-time@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/constant-time@npm:1.0.1"
+  checksum: dba4f4bf508de2ff15f7f0cbd875e70391aa3ba3698290fe1ed2feb151c243ba08a90fc6fb390ec2230e30fcc622318c591a7c0e35dcb8150afb50c797eac3d7
+  languageName: node
+  linkType: hard
+
 "@stablelib/ed25519@npm:^1.0.2":
   version: 1.0.2
   resolution: "@stablelib/ed25519@npm:1.0.2"
@@ -2361,10 +2378,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stablelib/hmac@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/hmac@npm:1.0.1"
+  dependencies:
+    "@stablelib/constant-time": ^1.0.1
+    "@stablelib/hash": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: e3b93f7144a5846a6e30213278f7570de6d3f9d09131b95ce76d5c5c8bf37bf5d1830f2ee8d847555707271dbfd6e2461221719fd4d8b27ff06b9dd689c0ec21
+  languageName: node
+  linkType: hard
+
 "@stablelib/int@npm:^1.0.1":
   version: 1.0.1
   resolution: "@stablelib/int@npm:1.0.1"
   checksum: 65bfbf50a382eea70c68e05366bf379cfceff8fbc076f1c267ef2f2411d7aed64fd140c415cb6c29f19a3910d3b8b7805d4b32ad5721a5007a8e744a808c7ae3
+  languageName: node
+  linkType: hard
+
+"@stablelib/pbkdf2@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/pbkdf2@npm:1.0.1"
+  dependencies:
+    "@stablelib/binary": ^1.0.1
+    "@stablelib/hash": ^1.0.1
+    "@stablelib/hmac": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: d1326e5901479f8a8b161c5620cea5fa666fcef5b7c4476d1e4c120a20feb3867a8a4fd84f02c4e09c55ce5f95e937cc0a240158af8d5720fbf357c7a6755bb8
   languageName: node
   linkType: hard
 
@@ -2375,6 +2415,41 @@ __metadata:
     "@stablelib/binary": ^1.0.1
     "@stablelib/wipe": ^1.0.1
   checksum: f63275079a588dab1594949996dbd564f3754d313368be8c70c06eea9c9a4fba9059962dcd114cafcca48b3b73707774ce8af2c94b7be79b662cde35d0049846
+  languageName: node
+  linkType: hard
+
+"@stablelib/scrypt@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/scrypt@npm:1.0.1"
+  dependencies:
+    "@stablelib/binary": ^1.0.1
+    "@stablelib/int": ^1.0.1
+    "@stablelib/pbkdf2": ^1.0.1
+    "@stablelib/sha256": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: 93f80f7a7847555ac891a241f116c1fa6e71d74ea437142878924a28e979e68d4d40dcfa287b88a86c8b0bce5937d2037b9f8a5e95f8afa93c9b507ec1ac94b9
+  languageName: node
+  linkType: hard
+
+"@stablelib/sha256@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/sha256@npm:1.0.1"
+  dependencies:
+    "@stablelib/binary": ^1.0.1
+    "@stablelib/hash": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: 38669871e1bda72eb537629ebceac1c72da8890273a9fbe088f81f6d14c1ec04e78be8c5b455380a06c67f8e62b2508e11e9063fcc257dbaa1b5c27ac756ba77
+  languageName: node
+  linkType: hard
+
+"@stablelib/sha3@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/sha3@npm:1.0.1"
+  dependencies:
+    "@stablelib/binary": ^1.0.1
+    "@stablelib/hash": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: 301a33a91d515ca135ce923bb3b775f4707241444bebad39614a5a0e5bf2bb3277979a625cf0c91417f75c97793ab4493a7e65cd092333959ff08463433fa2e3
   languageName: node
   linkType: hard
 

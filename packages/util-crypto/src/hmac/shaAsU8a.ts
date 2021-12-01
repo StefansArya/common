@@ -1,12 +1,12 @@
 // Copyright 2017-2021 @polkadot/util-crypto authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import { hasBigInt, u8aToU8a } from '@polkadot/util';
-import { hmacSha256, hmacSha512, isReady } from '@polkadot/wasm-crypto';
+import { hmac } from '@stablelib/hmac';
+import { SHA256 } from '@stablelib/sha256';
+import { SHA512 } from '@stablelib/sha512';
 
-import { hmac } from '../noble-hashes/lib/hmac';
-import { sha256 } from '../noble-hashes/lib/sha256';
-import { sha512 } from '../noble-hashes/lib/sha512';
+import { u8aToU8a } from '@polkadot/util';
+import { hmacSha256, hmacSha512, isReady } from '@polkadot/wasm-crypto';
 
 type BitLength = 256 | 512;
 
@@ -23,13 +23,13 @@ export function hmacShaAsU8a (key: Uint8Array | string, data: Uint8Array, bitLen
   const is256 = bitLength === 256;
   const u8aKey = u8aToU8a(key);
 
-  return !hasBigInt || (!onlyJs && isReady())
+  return !onlyJs && isReady()
     ? is256
       ? hmacSha256(u8aKey, data)
       : hmacSha512(u8aKey, data)
     : is256
-      ? hmac(sha256, u8aKey, data)
-      : hmac(sha512, u8aKey, data);
+      ? hmac(SHA256, u8aKey, data)
+      : hmac(SHA512, u8aKey, data);
 }
 
 /**
